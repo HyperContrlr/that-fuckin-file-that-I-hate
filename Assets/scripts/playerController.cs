@@ -6,6 +6,7 @@ public class playerController : MonoBehaviour
     [SerializeField] private float currentPlayerSpeed;
     [SerializeField] private float rotationRate; //horizontal sens
     [SerializeField] private float vertRotateRate; //vert sens
+    [SerializeField] private float gravMult;
     private Transform playerCamera;
     private float vertConstraints; //constraints for vert camera looking
     private Rigidbody rb;
@@ -22,6 +23,8 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //gravity
+        rb.AddForce(Vector3.down * gravMult);
         //player movement
         Vector3 playerVelocity = gameObject.transform.rotation * new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")) * currentPlayerSpeed;
         rb.linearVelocity = playerVelocity;
